@@ -3,21 +3,22 @@ package org.toannguyen.models.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.*;
+import org.toannguyen.enums.orderStatus;
 
-@ToString
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Data
 @Entity
-@Table(name = "users")
-public class user {
+@ToString
+public class orderPurchase {
     @Id
     @GeneratedValue
     private Integer id;
     private Integer userId;
-    private double balance;
+    private Integer productId;
+    private double price;
+    private orderStatus status;
 }
