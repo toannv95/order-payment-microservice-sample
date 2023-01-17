@@ -12,25 +12,26 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @RestController
+@RequestMapping("orders")
 public class orderController {
     private final orderService orderService;
     @Autowired
     public orderController(orderService orderService) {
         this.orderService = orderService;
     }
-    @PostMapping("orders/create")
+    @PostMapping()
     public Mono<orderPurchase> createOrder(@RequestBody order order) {
         return orderService.createOrder(order);
     }
-    @GetMapping("orders/all")
+    @GetMapping()
     public Flux<orderPurchase> getAllOrders() {
         return orderService.getAll();
     }
-    @GetMapping(path = "orders/all/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(path = "stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<List<orderPurchase>> getAllOrdersStream() {
         return orderService.reactiveGetAll();
     }
-    @GetMapping("orders/{id}")
+    @GetMapping("{id}")
     public Mono<orderPurchase> getOrderById(@PathVariable Integer id) {
         return orderService.getOrderById(id);
     }

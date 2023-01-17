@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.toannguyen.models.entities.transaction;
 import org.toannguyen.services.transactionService;
@@ -15,6 +16,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @RestController
+@RequestMapping("transactions")
 public class transactionController {
     private final transactionService transactionService;
 
@@ -23,12 +25,12 @@ public class transactionController {
         this.transactionService = transactionService;
     }
 
-    @GetMapping("transactions/all")
+    @GetMapping()
     public Flux<transaction> getAllOrders() {
         return transactionService.getAll();
     }
 
-    @GetMapping("transactions/{id}")
+    @GetMapping("{id}")
     public Mono<transaction> getOrderById(@PathVariable Integer id) {
         return transactionService.getOrderById(id);
     }
